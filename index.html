@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Aula Inclusiva y Divertida</title>
+<title>Aula Divertida</title>
 <style>
 :root{--bg:#fff;--card:#fff;--ink:#3a1420;--p:#7b1e3a;--g:#7b1e3a;--line:#d9a9b6;--tint:#fbeef1;--rule:#f3dbe2;--h:#7b1e3a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a0f1a;--card:#3b1727;--ink:#fbeef0;--line:#7a3550;--p:#b83b5e;--g:#b83b5e;--tint:#4a1d30;--rule:#35182a;--h:#f4b6c8}}
@@ -67,7 +67,7 @@ footer{text-align:center;font-size:.75em;padding:18px 16px;background:var(--p);c
 details td{border:2px solid var(--line);padding:6px}
 </style></head><body>
 <header><button id="mh" class="float" onclick="go('mascota')" aria-label="Elegir mi mascota" style="font-size:2em;background:#fff;border-radius:50%;min-height:0;padding:6px 14px">🦉</button>
-<h1>Aula Inclusiva y Divertida</h1>
+<h1>Aula Divertida</h1>
 <p>Institución Dr. José María Vargas · San Juan de los Morros, Guárico</p></header>
 <div class="bar" role="toolbar" aria-label="Ayudas">
 <button onclick="go('inicio')">🏠 Inicio</button>
@@ -79,7 +79,7 @@ details td{border:2px solid var(--line);padding:6px}
 <button onclick="lv(this)" aria-label="Nivel de dificultad">Nivel ⭐</button>
 <button onclick="leer()" aria-label="Escuchar">🔊</button></div>
 <main id="main" tabindex="-1"></main>
-<footer>“Todos somos diferentes, todos somos especiales, todos tenemos derecho a aprender”.</footer>
+<footer>“Responsabilidad camino al exito”.</footer>
 <script>
 const $=s=>document.querySelector(s),R=a=>a[Math.floor(Math.random()*a.length)],rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),sh=a=>[...a].sort(()=>Math.random()-.5);
 let lvl=1,audio=true,cur=null,fr=null,q=null,stars=0,bi,ac,mo;
@@ -93,8 +93,8 @@ let TEL='',ult=null;try{TEL=localStorage.getItem('aidt')||''}catch(e){}
 let HIS=[];try{HIS=JSON.parse(localStorage.getItem('aidh')||'[]')}catch(e){}
 let ER={},err=0;try{ER=JSON.parse(localStorage.getItem('aide')||'{}')}catch(e){}
 function fallo(){err++;ER[cur]=(ER[cur]||0)+1;try{localStorage.setItem('aide',JSON.stringify(ER))}catch(e){}}
-function textoAvance(){const pl=n=>n+' '+(n==1?'error':'errores'),T=Object.values(ER).reduce((s,v)=>s+v,0),L=[...AP,...JG,AC.emociones].filter(a=>S[a[0]]||ER[a[0]]).map(a=>'• '+a[2]+': '+(S[a[0]]||0)+' aciertos, '+pl(ER[a[0]]||0)),U=HIS.slice(-5).map(r=>'• '+AC[r.a][2]+': '+r.e+' de '+r.t+' estrellas'+(r.x==null?'':', '+pl(r.x)));return 'Aula Inclusiva y Divertida\nEstudiante: '+(NM||'Sin nombre')+'\nSección: '+(SEC||'-')+'\nTotal de equivocaciones: '+T+'\n\nÚltimas rondas:\n'+(U.join('\n')||'Sin rondas todavía.')+'\n\nAciertos y errores por actividad:\n'+(L.join('\n')||'Sin actividades todavía.')}
-function enlace(t){const d=TEL.replace(/\D/g,''),e=encodeURIComponent(t);return TEL.includes('@')?'mailto:'+TEL+'?subject='+encodeURIComponent('Aula Inclusiva: progreso')+'&body='+e:d.length>=8?'https://wa.me/'+d+'?text='+e:''}
+function textoAvance(){const pl=n=>n+' '+(n==1?'error':'errores'),T=Object.values(ER).reduce((s,v)=>s+v,0),L=[...AP,...JG,AC.emociones].filter(a=>S[a[0]]||ER[a[0]]).map(a=>'• '+a[2]+': '+(S[a[0]]||0)+' aciertos, '+pl(ER[a[0]]||0)),U=HIS.slice(-5).map(r=>'• '+AC[r.a][2]+': '+r.e+' de '+r.t+' estrellas'+(r.x==null?'':', '+pl(r.x)));return 'Aula Divertida\nEstudiante: '+(NM||'Sin nombre')+'\nSección: '+(SEC||'-')+'\nTotal de equivocaciones: '+T+'\n\nÚltimas rondas:\n'+(U.join('\n')||'Sin rondas todavía.')+'\n\nAciertos y errores por actividad:\n'+(L.join('\n')||'Sin actividades todavía.')}
+function enlace(t){const d=TEL.replace(/\D/g,''),e=encodeURIComponent(t);return TEL.includes('@')?'mailto:'+TEL+'?subject='+encodeURIComponent('Aula Divertida: progreso')+'&body='+e:d.length>=8?'https://wa.me/'+d+'?text='+e:''}
 function setSec(s){SEC=s;try{localStorage.setItem('aids',s)}catch(e){}$('#bs').textContent='🏫 Sección '+s;go('inicio')}
 const MA=[['🦉','Búho',.8,.9,'¡Hola!'],['🐘','Elefante',.7,.9,'¡Hola!'],['🐢','Tortuga',.9,.8,'¡Hola!'],['🦋','Mariposa',1.3,1,'¡Hola!'],['🐶','Perrito',1.15,1,'¡Hola!'],['🐱','Gatito',1.25,.95,'¡Hola!'],['🦁','León',.75,.9,'¡Hola!'],['🐰','Conejo',1.3,1.05,'¡Hola!'],['🐬','Delfín',1.1,1,'¡Hola!'],['🦜','Loro',1.2,1.05,'¡Hola!']];
 function setM(m){M=m;try{localStorage.setItem('aidm',m)}catch(e){}$('#mh').textContent=m}
