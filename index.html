@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Aula Divertida</title>
+<title>Aula Inclusiva y Divertida</title>
 <style>
 :root{--bg:#fff;--card:#fff;--ink:#3a1420;--p:#7b1e3a;--g:#7b1e3a;--line:#d9a9b6;--tint:#fbeef1;--rule:#f3dbe2;--h:#7b1e3a;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 @media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#2a0f1a;--card:#3b1727;--ink:#fbeef0;--line:#7a3550;--p:#b83b5e;--g:#b83b5e;--tint:#4a1d30;--rule:#35182a;--h:#f4b6c8}}
@@ -51,6 +51,11 @@ main{max-width:960px;margin:auto;padding:14px 16px 40px 36px}
 .rd span:nth-child(odd){background:var(--tint)}
 .pad{display:grid;grid-template-columns:repeat(3,78px);gap:10px;justify-content:center;margin:10px 0}
 .pad button{font-size:1.8em;margin:0;padding:6px;border-radius:14px}
+#lienzo{display:block;width:100%;max-width:560px;aspect-ratio:4/3;margin:12px auto;background:#fff;border:4px solid var(--p);border-radius:10px;touch-action:none;cursor:crosshair}
+.paleta,.pinceles{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:8px 0}
+.col{width:52px;height:52px;min-height:0;padding:0;border-radius:50%;margin:0}
+.sel{outline:5px solid var(--h);outline-offset:3px}
+.pinceles button{margin:0;min-width:64px;display:inline-flex;align-items:center;justify-content:center}
 .bc{width:150px;height:150px;border-radius:50%;background:var(--p);border:8px solid var(--tint);margin:34px auto;animation:br 8s ease-in-out infinite}
 .float{animation:fl 6s ease-in-out infinite}
 @keyframes br{50%{transform:scale(1.5)}}
@@ -67,7 +72,7 @@ footer{text-align:center;font-size:.75em;padding:18px 16px;background:var(--p);c
 details td{border:2px solid var(--line);padding:6px}
 </style></head><body>
 <header><button id="mh" class="float" onclick="go('mascota')" aria-label="Elegir mi mascota" style="font-size:2em;background:#fff;border-radius:50%;min-height:0;padding:6px 14px">🦉</button>
-<h1>Aula Divertida</h1>
+<h1>Aula Inclusiva y Divertida</h1>
 <p>Institución Dr. José María Vargas · San Juan de los Morros, Guárico</p></header>
 <div class="bar" role="toolbar" aria-label="Ayudas">
 <button onclick="go('inicio')">🏠 Inicio</button>
@@ -79,7 +84,7 @@ details td{border:2px solid var(--line);padding:6px}
 <button onclick="lv(this)" aria-label="Nivel de dificultad">Nivel ⭐</button>
 <button onclick="leer()" aria-label="Escuchar">🔊</button></div>
 <main id="main" tabindex="-1"></main>
-<footer>“Responsabilidad camino al exito”.</footer>
+<footer>“Todos somos diferentes, todos somos especiales, todos tenemos derecho a aprender”.</footer>
 <script>
 const $=s=>document.querySelector(s),R=a=>a[Math.floor(Math.random()*a.length)],rnd=(a,b)=>a+Math.floor(Math.random()*(b-a+1)),sh=a=>[...a].sort(()=>Math.random()-.5);
 let lvl=1,audio=true,cur=null,fr=null,q=null,stars=0,bi,ac,mo;
@@ -93,13 +98,13 @@ let TEL='',ult=null;try{TEL=localStorage.getItem('aidt')||''}catch(e){}
 let HIS=[];try{HIS=JSON.parse(localStorage.getItem('aidh')||'[]')}catch(e){}
 let ER={},err=0;try{ER=JSON.parse(localStorage.getItem('aide')||'{}')}catch(e){}
 function fallo(){err++;ER[cur]=(ER[cur]||0)+1;try{localStorage.setItem('aide',JSON.stringify(ER))}catch(e){}}
-function textoAvance(){const pl=n=>n+' '+(n==1?'error':'errores'),T=Object.values(ER).reduce((s,v)=>s+v,0),L=[...AP,...JG,AC.emociones].filter(a=>S[a[0]]||ER[a[0]]).map(a=>'• '+a[2]+': '+(S[a[0]]||0)+' aciertos, '+pl(ER[a[0]]||0)),U=HIS.slice(-5).map(r=>'• '+AC[r.a][2]+': '+r.e+' de '+r.t+' estrellas'+(r.x==null?'':', '+pl(r.x)));return 'Aula Divertida\nEstudiante: '+(NM||'Sin nombre')+'\nSección: '+(SEC||'-')+'\nTotal de equivocaciones: '+T+'\n\nÚltimas rondas:\n'+(U.join('\n')||'Sin rondas todavía.')+'\n\nAciertos y errores por actividad:\n'+(L.join('\n')||'Sin actividades todavía.')}
-function enlace(t){const d=TEL.replace(/\D/g,''),e=encodeURIComponent(t);return TEL.includes('@')?'mailto:'+TEL+'?subject='+encodeURIComponent('Aula Divertida: progreso')+'&body='+e:d.length>=8?'https://wa.me/'+d+'?text='+e:''}
+function textoAvance(){const pl=n=>n+' '+(n==1?'error':'errores'),T=Object.values(ER).reduce((s,v)=>s+v,0),L=[...AP,...JG,AC.emociones].filter(a=>S[a[0]]||ER[a[0]]).map(a=>'• '+a[2]+': '+(S[a[0]]||0)+' aciertos, '+pl(ER[a[0]]||0)),U=HIS.filter(r=>AC[r.a]).slice(-5).map(r=>'• '+AC[r.a][2]+': '+r.e+' de '+r.t+' estrellas'+(r.x==null?'':', '+pl(r.x)));return 'Aula Inclusiva y Divertida\nEstudiante: '+(NM||'Sin nombre')+'\nSección: '+(SEC||'-')+'\nTotal de equivocaciones: '+T+'\n\nÚltimas rondas:\n'+(U.join('\n')||'Sin rondas todavía.')+'\n\nAciertos y errores por actividad:\n'+(L.join('\n')||'Sin actividades todavía.')}
+function enlace(t){const d=TEL.replace(/\D/g,''),e=encodeURIComponent(t);return TEL.includes('@')?'mailto:'+TEL+'?subject='+encodeURIComponent('Aula Inclusiva: progreso')+'&body='+e:d.length>=8?'https://wa.me/'+d+'?text='+e:''}
 function setSec(s){SEC=s;try{localStorage.setItem('aids',s)}catch(e){}$('#bs').textContent='🏫 Sección '+s;go('inicio')}
 const MA=[['🦉','Búho',.8,.9,'¡Hola!'],['🐘','Elefante',.7,.9,'¡Hola!'],['🐢','Tortuga',.9,.8,'¡Hola!'],['🦋','Mariposa',1.3,1,'¡Hola!'],['🐶','Perrito',1.15,1,'¡Hola!'],['🐱','Gatito',1.25,.95,'¡Hola!'],['🦁','León',.75,.9,'¡Hola!'],['🐰','Conejo',1.3,1.05,'¡Hola!'],['🐬','Delfín',1.1,1,'¡Hola!'],['🦜','Loro',1.2,1.05,'¡Hola!']];
 function setM(m){M=m;try{localStorage.setItem('aidm',m)}catch(e){}$('#mh').textContent=m}
 document.addEventListener('pointerdown',()=>{try{speechSynthesis.speak(new SpeechSynthesisUtterance(''))}catch(e){}},{once:true});
-function leer(){const t=cur&&q&&$('#fb')&&cur!='memoria'&&cur!='puzzle'&&cur!='carrito'?(q.s||q.p):$('#main').innerText.slice(0,400);say(t)}
+function leer(){const t=cur&&q&&$('#fb')&&cur!='memoria'&&cur!='puzzle'&&cur!='carrito'&&cur!='dibujo'?(q.s||q.p):$('#main').innerText.slice(0,400);say(t)}
 let sk=0;function say(t,L){if(!audio||!window.speechSynthesis)return;const k=++sk,w=speechSynthesis.speaking||speechSynthesis.pending;if(w)speechSynthesis.cancel();const u=new SpeechSynthesisUtterance(String(t).replace(/\p{Extended_Pictographic}|\uFE0F|\u200D/gu,''));u.lang=L=='en'?'en-US':'es-VE';const i=Math.max(0,MA.findIndex(x=>x[0]==M)),m=MA[i],vs=speechSynthesis.getVoices().filter(v=>(L=='en'?/^en/i:/^es/i).test(v.lang)).sort((a,b)=>a.name<b.name?-1:1);if(vs.length){u.voice=vs[i%vs.length];u.lang=u.voice.lang}u.pitch=m[2];u.rate=.85*m[3];w?setTimeout(()=>{if(k==sk)speechSynthesis.speak(u)},90):speechSynthesis.speak(u)}
 function tg(k,b){const on=document.documentElement.toggleAttribute('data-'+k);b.setAttribute('aria-pressed',on);return on}
 function calma(b){if(tg('calm',b)&&mo)music()}
@@ -107,8 +112,8 @@ function lv(b){lvl=lvl%3+1;b.textContent='Nivel '+'⭐'.repeat(lvl)}
 const N=()=>lvl+2,opts=(a,pool,n)=>sh([a,...sh(pool.filter(x=>x!==a)).slice(0,n-1)]);
 const near=a=>{const s=new Set([a]);while(s.size<N())s.add(Math.max(0,a+rnd(-4,4)));return sh([...s]).map(String)};
 /* ===== DATOS (para agregar actividades: añade una fila en AP/JG y una función en G) ===== */
-const AP=[['abc','🔠','Abecedario','Reconocer letras y su sonido inicial'],['vocales','🔤','Vocales','Identificar las vocales al inicio de las palabras'],['silabas','🧩','Sílabas','Formar palabras uniendo sílabas'],['numeros','🔢','Números','Contar y reconocer números hasta el 100 (según nivel)'],['sumas','➕','Sumas y restas','Resolver sumas y restas sencillas con apoyo visual'],['formas','🔷','Colores y formas','Nombrar figuras geométricas y colores'],['animales','🦋','Animales y naturaleza','Asociar imagen y palabra sobre el entorno'],['cuerpo','🧍','Mi cuerpo','Nombrar las partes del cuerpo'],['valores','💛','Valores','Elegir acciones de respeto, ayuda y amistad'],['ingles','🗣️','Inglés: ¿cómo se dice?','Aprender palabras en inglés: animales, colores, frutas y números'],['ingles2','🎧','Inglés: escucha','Reconocer palabras en inglés al escucharlas']];
-const JG=[['asociar','🖼️','Imagen y palabra','Asociar dibujos con su nombre'],['sonidos','👂','Sonidos y letras','Identificar letras por su sonido'],['secuencia','🎨','Secuencias','Completar patrones'],['atencion','🔍','Encuentra el diferente','Atención y observación'],['memoria','🃏','Memoria','Memoria visual con parejas'],['puzzle','🧩','Rompecabezas','Ordenar piezas para formar una imagen'],['carrito','🚗','Maneja el carrito','Orientación y coordinación: moverse arriba, abajo, izquierda y derecha para llegar a una meta']];
+const AP=[['abc','🔠','Abecedario','Reconocer letras y su sonido inicial'],['vocales','🔤','Vocales','Identificar las vocales al inicio de las palabras'],['silabas','🧩','Sílabas','Formar palabras uniendo sílabas'],['numeros','🔢','Números','Contar y reconocer números hasta el 100 (según nivel)'],['sumas','➕','Sumas y restas','Resolver sumas y restas sencillas con apoyo visual'],['formas','🔷','Colores y formas','Nombrar figuras geométricas y colores'],['animales','🦋','Animales y naturaleza','Asociar imagen y palabra sobre el entorno'],['cuerpo','🧍','Mi cuerpo','Nombrar las partes del cuerpo'],['valores','💛','Valores','Elegir acciones de respeto, ayuda y amistad'],['ingles','🗣️','Inglés: ¿cómo se dice?','Aprender palabras en inglés: animales, colores, frutas y números']];
+const JG=[['asociar','🖼️','Imagen y palabra','Asociar dibujos con su nombre'],['sonidos','👂','Sonidos y letras','Identificar letras por su sonido'],['secuencia','🎨','Secuencias','Completar patrones'],['atencion','🔍','Encuentra el diferente','Atención y observación'],['memoria','🃏','Memoria','Memoria visual con parejas'],['puzzle','🧩','Rompecabezas','Ordenar piezas para formar una imagen'],['dibujo','🖍️','Dibujo libre','Expresión creativa y motricidad fina: dibujar con colores usando el dedo o el mouse'],['carrito','🚗','Maneja el carrito','Orientación y coordinación: moverse arriba, abajo, izquierda y derecha para llegar a una meta']];
 const AC={emociones:['emociones','😊','Reconocer emociones','Identificar emociones en pictogramas']};[...AP,...JG].forEach(a=>AC[a[0]]=a);
 const VO=[['A','🐝','abeja'],['E','🐘','elefante'],['I','🏝️','isla'],['O','🐻','oso'],['U','🍇','uvas']];
 const AB=[['A','🐝'],['B','⚽'],['C','🏠'],['G','🐱'],['L','🌙'],['M','🍎'],['P','🦆'],['S','☀️'],['V','🐮'],['R','🐭']];
@@ -134,7 +139,6 @@ numeros:()=>{if(Math.random()<.5&&lvl<3){const n=rnd(1,lvl==1?6:10);return{p:'¿
 sumas:()=>{const m=[5,10,20][lvl-1],s=lvl==1||Math.random()<.5;let a=rnd(1,m),b=rnd(1,m);if(!s&&b>a)[a,b]=[b,a];const r=s?a+b:a-b;return{p:a+(s?' más ':' menos ')+b+', ¿cuánto es?',big:lvl==1?'🍎'.repeat(a)+' ➕ '+'🍎'.repeat(b):a+(s?' + ':' − ')+b,o:near(r),a:String(r)}},
 formas:()=>pw(Math.random()<.5?FG:CL),animales:()=>pw(AN),cuerpo:()=>pw(BD),emociones:()=>pw(EMQ),asociar:()=>pw(AN.concat(BD)),
 ingles:()=>{const l=R([EA,EC,EF,EN].slice(0,lvl+1)),w=R(l);return{p:'¿Cómo se dice en inglés?',big:w[1],o:opts(w[0],l.map(x=>x[0]),Math.min(5,N())),a:w[0],en:w[0]}},
-ingles2:()=>{const l=R([EA,EC,EF,EN].slice(0,lvl+1)),w=R(l);return{p:'Escucha en inglés y toca el dibujo',big:'🔊',o:opts(w[1],l.map(x=>x[1]),Math.min(5,N())),a:w[1],s:w[0],l:'en',en:w[0]}},
 valores:()=>{const v=R(VL);return{p:v[0],big:v[1],o:sh([v[2],v[3],v[4]]),a:v[2]}},
 sonidos:()=>{const l=R(LT);return{p:'Escucha y toca la letra',big:'🔊',o:opts(l,LT,N()),a:l,s:LN[l]}},
 secuencia:()=>{const e=sh(['🔴','🔵','🟢','🟡','⭐','❤️']),pt=R(['AB','AB','AAB','ABC'].slice(0,lvl+1)),k={A:e[0],B:e[1],C:e[2]},sq=[];for(let i=0;i<pt.length*3;i++)sq.push(k[pt[i%pt.length]]);const a=sq.pop();return{p:'¿Qué sigue?',big:sq.join(' ')+' ❓',o:opts(a,e,Math.min(4,N())),a}},
@@ -175,9 +179,9 @@ function show(v){if(!SEC)v='seccion';if(!V[v])v='inicio';window.speechSynthesis&
 onhashchange=()=>show(location.hash.slice(1));
 function emo(i){const e=EM6[i];$('#ep').innerHTML=`<div class="big">${e[0]}</div><p>${e[1]}. ${e[2]}</p>`;say(e[1]+'. '+e[2])}
 function story(i,p){const s=ST[i],t=s[3][p];$('#main').innerHTML=`<button onclick="go('cuentos')">⬅️ Cuentos</button><div class="card"><h2>${s[0]}</h2><div class="big">${s[2]}</div><div class="bub"><span>${M}</span><p style="font-size:1.3em">${t}</p></div><button onclick="say(ST[${i}][3][${p}])" aria-label="Escuchar">🔊</button><div>${p?`<button onclick="story(${i},${p-1})">◀️ Antes</button>`:''}${p<2?`<button class="ok" onclick="story(${i},${p+1})">Sigue ▶️</button>`:`<button class="ok" onclick="go('cuentos')">🌟 Fin</button>`}</div><p>Página ${p+1} de 3 · Valor: ${s[1]}</p></div>`;say(t)}
-function music(){const b=$('#mus');if(mo){mo.forEach(o=>o.stop());mo=null;b&&b.setAttribute('aria-pressed','false');return}try{ac=ac||new AudioContext();const g=ac.createGain();g.gain.value=.04;g.connect(ac.destination);mo=[220,277,330].map(f=>{const o=ac.createOscillator();o.frequency.value=f;o.connect(g);o.start();return o});b&&b.setAttribute('aria-pressed','true')}catch(e){}}
+function music(){const b=$('#mus');if(mo){clearInterval(mo);mo=null;b&&b.setAttribute('aria-pressed','false');return}try{ac=ac||new AudioContext();if(ac.state=='suspended')ac.resume();const P=[261.63,329.63,392,440,523.25],out=ac.createGain(),lp=ac.createBiquadFilter();out.gain.value=.6;lp.type='lowpass';lp.frequency.value=1200;out.connect(lp);lp.connect(ac.destination);const nota=()=>{const t=ac.currentTime,o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=R(P);g.gain.setValueAtTime(0,t);g.gain.linearRampToValueAtTime(.07,t+.2);g.gain.exponentialRampToValueAtTime(.0005,t+3);o.connect(g);g.connect(out);o.start(t);o.stop(t+3.1)};nota();mo=setInterval(nota,2400);b&&b.setAttribute('aria-pressed','true')}catch(e){}}
 /* ===== ACTIVIDADES ===== */
-function openAct(k,from){cur=k;fr=from||(AP.some(a=>a[0]==k)?'aprender':'juegos');stars=0;ex=0;err=0;used.clear();k=='memoria'?memo():k=='puzzle'?puz():k=='carrito'?carro():quiz()}
+function openAct(k,from){cur=k;fr=from||(AP.some(a=>a[0]==k)?'aprender':'juegos');stars=0;ex=0;err=0;used.clear();k=='memoria'?memo():k=='puzzle'?puz():k=='carrito'?carro():k=='dibujo'?dibujo():quiz()}
 const back=()=>go(fr);
 let ex=0;const used=new Set(),RN=()=>cur=='memoria'||cur=='puzzle'||cur=='carrito'?3:5,bar=()=>'⭐'.repeat(stars)+'☆'.repeat(RN()-stars);
 function fin(){const n=RN();HIS.push({f:new Date().toISOString().slice(0,10)+' '+new Date().toTimeString().slice(0,5),a:cur,e:stars,t:n,x:err});HIS=HIS.slice(-200);try{localStorage.setItem('aidh',JSON.stringify(HIS))}catch(e){}$('#main').innerHTML=`<div class="card"><div class="big">${M}</div><h2>¡Terminaste!</h2><div class="big">${bar()}</div><p>${stars} de ${n} estrellas. ¡Lo hiciste muy bien!</p><button class="ok" onclick="openAct(cur,fr)">🔁 Otra vez</button><button onclick="back()">⬅️ Volver</button>${enlace(textoAvance())?`<a class="b" href="${enlace(textoAvance())}" target="_blank" rel="noopener">📲 Enviar mis avances a mi maestra</a>`:`<p class="fb">Falta el contacto de la maestra: se escribe en Adultos.</p>`}</div>`;say('¡Terminaste! Ganaste '+stars+' de '+n+' estrellas. ¡Lo hiciste muy bien!')}
@@ -194,6 +198,25 @@ const draw=()=>{$('#rd').innerHTML=Array.from({length:z*z},(_,i)=>{const p=[i%z,
 window.mv=(dx,dy)=>{if(won)return;const n=[car[0]+dx,car[1]+dy],f=$('#fb');if(n[0]<0||n[1]<0||n[0]>=z||n[1]>=z){f.textContent='¡Por ahí no hay camino!';fallo();return}if(at(tr,n)){f.textContent='¡Hay un árbol! Prueba otro camino.';fallo();return}car=n;const i=st.findIndex(s=>s[0]==n[0]&&s[1]==n[1]);if(i>=0){st.splice(i,1);got++;f.textContent='⭐ '+got+' de '+nS}else f.textContent='';if(got==nS){won=1;f.textContent='🌟 ¡Llegaste a todas las estrellas!';stars=Math.min(stars+1,RN());$('#st').textContent=bar();save('carrito');say('¡Muy bien! Llegaste a todas las estrellas')}draw()};
 onkeydown=e=>{const d={ArrowUp:[0,-1],ArrowDown:[0,1],ArrowLeft:[-1,0],ArrowRight:[1,0]}[e.key];if(d&&cur=='carrito'){e.preventDefault();mv(d[0],d[1])}};
 draw()}
+const DC=['#7b1e3a','#e53935','#fb8c00','#fdd835','#43a047','#1e88e5','#8e24aa','#6d4c41','#212121'],GR=[4,10,22],DI=['un sol','una casa','una flor','a tu familia','un animal','a tu mascota','un árbol','una estrella'];
+function dibujo(){let col=DC[0],gr=10,bor=false,dib=false,ux=0,uy=0,pila=[];const E='Dibuja lo que quieras con tu dedo o con el mouse.';say(E);
+$('#main').innerHTML=`<button onclick="back()">⬅️ Volver</button><div class="card"><h2>🖍️ Dibujo libre</h2><div class="bub"><span>${M}</span><p id="idea">Dibuja ${R(DI)}. ¡O lo que tú quieras!</p></div><button onclick="say($('#idea').textContent)" aria-label="Escuchar">🔊</button><button id="otra">💡 Otra idea</button><canvas id="lienzo" width="800" height="600" aria-label="Lienzo para dibujar"></canvas><div class="paleta" id="pal"></div><div class="pinceles" id="pin"></div><div class="pinceles"><button id="goma">🧽 Borrador</button><button id="und">↩️ Deshacer</button><button id="clr">🗑️ Borrar todo</button></div><div class="fb" id="fb" aria-live="polite"></div><button class="ok" id="fin2">✅ Terminé mi dibujo</button></div>`;
+const cv=$('#lienzo'),cx=cv.getContext('2d'),pal=$('#pal'),pin=$('#pin'),goma=$('#goma');
+const blanco=()=>{cx.fillStyle='#fff';cx.fillRect(0,0,800,600)},snap=()=>{pila.push(cx.getImageData(0,0,800,600));if(pila.length>15)pila.shift()},
+pos=e=>{const r=cv.getBoundingClientRect();return[(e.clientX-r.left)*cv.width/r.width,(e.clientY-r.top)*cv.height/r.height]},
+mark=()=>{[...pal.children].forEach((b,i)=>b.classList.toggle('sel',!bor&&DC[i]==col));goma.classList.toggle('sel',bor);[...pin.children].forEach((b,i)=>b.classList.toggle('sel',GR[i]==gr))};
+blanco();cx.lineCap='round';cx.lineJoin='round';
+DC.forEach(c=>{const b=document.createElement('button');b.className='col';b.style.background=c;b.setAttribute('aria-label','Color');b.onclick=()=>{col=c;bor=false;mark()};pal.append(b)});
+GR.forEach(g=>{const b=document.createElement('button');b.setAttribute('aria-label','Grosor del lápiz');b.innerHTML=`<span style="display:inline-block;width:${g}px;height:${g}px;border-radius:50%;background:var(--ink)"></span>`;b.onclick=()=>{gr=g;mark()};pin.append(b)});
+goma.onclick=()=>{bor=true;mark()};
+$('#und').onclick=()=>{if(pila.length)cx.putImageData(pila.pop(),0,0)};
+$('#clr').onclick=()=>{snap();blanco()};
+$('#otra').onclick=()=>{const t='Dibuja '+R(DI)+'. ¡O lo que tú quieras!';$('#idea').textContent=t;say(t)};
+$('#fin2').onclick=()=>{save('dibujo');$('#fb').textContent=M+' ¡Qué lindo dibujo!';say('¡Qué lindo dibujo!')};
+cv.onpointerdown=e=>{e.preventDefault();try{cv.setPointerCapture(e.pointerId)}catch(x){}snap();dib=true;[ux,uy]=pos(e);cx.fillStyle=bor?'#fff':col;cx.beginPath();cx.arc(ux,uy,gr/2,0,7);cx.fill()};
+cv.onpointermove=e=>{if(!dib)return;const[x,y]=pos(e);cx.strokeStyle=bor?'#fff':col;cx.lineWidth=gr;cx.beginPath();cx.moveTo(ux,uy);cx.lineTo(x,y);cx.stroke();ux=x;uy=y};
+cv.onpointerup=cv.onpointercancel=()=>{dib=false};
+mark()}
 function puz(){if(ex>=RN())return fin();ex++;const T=PZ.slice(0,[4,6,9][lvl-1]),c=[2,3,3][lvl-1];let a,s=-1,w=0;say('Toca dos piezas para cambiarlas. Arma este dibujo.');do a=sh(T);while(a.join()==T.join());
 $('#main').innerHTML=`<button onclick="back()">⬅️ Volver</button><div class="card"><h2>🧩 Rompecabezas</h2><div class="bub"><span>${M}</span><p>Toca dos piezas para cambiarlas. Arma este dibujo.</p></div><button onclick="say('Toca dos piezas para cambiarlas. Arma este dibujo.')" aria-label="Escuchar">🔊</button><div class="mod" style="--c:${c}">${T.map(x=>`<span>${x}</span>`).join('')}</div><div class="opts g" style="--c:${c}" id="pb"></div><div class="fb" id="fb" aria-live="polite"></div><button onclick="puz()">${ex<RN()?'Siguiente ➡️':'Terminar 🎉'}</button><p>Ejercicio ${ex} de ${RN()} · <span id="st">${bar()}</span></p></div>`;
 const draw=()=>{$('#pb').innerHTML=a.map((x,i)=>`<button class="${i==s?'ok':''}" onclick="sw(${i})">${x}</button>`).join('');if(a.join()==T.join()&&!w){w=1;$('#fb').textContent='🌟 ¡Lo lograste!';stars=Math.min(stars+1,RN());$('#st').textContent=bar();save('puzzle');say('Lo lograste')}};
